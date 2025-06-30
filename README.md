@@ -1,3 +1,6 @@
+# kabaww's neovim kickstart
+:-)
+
 # kickstart.nvim
 
 ## Introduction
