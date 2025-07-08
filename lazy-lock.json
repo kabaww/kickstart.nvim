@@ -2,7 +2,7 @@
   "LazyVim": { "branch": "main", "commit": "25abbf546d564dc484cf903804661ba12de45507" },
   "LuaSnip": { "branch": "master", "commit": "458560534a73f7f8d7a11a146c801db00b081df0" },
   "avante.nvim": { "branch": "main", "commit": "30eb77af045015c890094dc514cf49d06f830cbe" },
-  "blink.cmp": { "branch": "main", "commit": "9bcb14b43852a6f2bfd5ac9ef29cb5cf09b1b39b" },
+  "blink.cmp": { "branch": "main", "commit": "f66e22e3003c9dfe2eb7cddb4d314a57e48ac752" },
   "conform.nvim": { "branch": "master", "commit": "973f3cb73887d510321653044791d7937c7ec0fa" },
   "copilot.lua": { "branch": "master", "commit": "3680bebcc95dfd6c7509466367e66f6dc64a5140" },
   "dressing.nvim": { "branch": "master", "commit": "2d7c2db2507fa3c4956142ee607431ddb2828639" },

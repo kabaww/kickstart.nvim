@@ -90,6 +90,12 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
 
+-- tab stops
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.softtabstop = -1
+
 -- DISABLE netrw AS PER nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -145,6 +151,8 @@ vim.o.timeoutlen = 300
 vim.o.splitright = true
 vim.o.splitbelow = true
 
+-- completeopt
+vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'noselect' }
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
@@ -687,6 +695,39 @@ require('lazy').setup({
         -- ts_ls = {},
         --
 
+        svelte = {
+          filetypes = { 'svelte' },
+          init_options = {
+            configurations = {
+              svelte = {
+                plugin = {
+                  html = { completions = { emmet = true } },
+                  css = { completions = { emmet = true } },
+                },
+              },
+            },
+          },
+        },
+        emmet_language_server = {
+          filetypes = {
+            'html',
+            'css',
+            'javascriptreact', -- for JSX
+            'typescriptreact', -- for TSX
+            'javascript',
+            'typescript',
+            'vue',
+            'svelte', -- <--- THIS IS THE KEY LINE TO ADD!
+            'scss',
+            'less',
+            'sass',
+            'pug',
+            'erb',
+            'php',
+            'jsx',
+            'tsx',
+          },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -783,7 +824,9 @@ require('lazy').setup({
   { -- Autocompletion
     'saghen/blink.cmp',
     event = 'VimEnter',
-    version = '1.*',
+    branch = 'main',
+    build = 'cargo +nightly build --release',
+    -- version = '1.*',
     dependencies = {
       -- Snippet Engine
       {
@@ -838,7 +881,9 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'default',
+        preset = 'enter',
+        ['<Tab>'] = { 'select_next', 'fallback' },
+        ['<S-Tab>'] = { 'select_prev', 'fallback' },
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -853,12 +898,23 @@ require('lazy').setup({
       completion = {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = false, auto_show_delay_ms = 500 },
+        -- auto_select = false,
+        -- max_items = 50,
+        -- throttle = 20,
+        -- debounce = 15,
+        documentation = {
+          auto_show = false,
+          auto_show_delay_ms = 500,
+        },
       },
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'lazydev' },
         providers = {
+          lsp = {
+            max_items = 20,
+            async = true,
+          },
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         },
       },
@@ -872,7 +928,7 @@ require('lazy').setup({
       -- the rust implementation via `'prefer_rust_with_warning'`
       --
       -- See :h blink-cmp-config-fuzzy for more information
-      fuzzy = { implementation = 'lua' },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
