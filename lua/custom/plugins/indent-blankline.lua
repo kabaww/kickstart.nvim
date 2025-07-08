@@ -13,5 +13,5 @@ return {
       },
     }
   end,
-  vim.api.nvim_set_hl(0, 'IblScope', { fg = '#1CDACD', bold = true }),
+  vim.api.nvim_set_hl(0, 'IblScope', { fg = '#FF5517', bold = true }),
 }
