@@ -808,11 +808,31 @@ require('lazy').setup({
         else
           return {
             timeout_ms = 500,
-            lsp_format = 'fallback',
+            lsp_format = 'never',
           }
         end
       end,
       formatters_by_ft = {
+
+        -- For JavaScript, TypeScript, JSX, TSX:
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        javascriptreact = { 'prettier' }, -- For .jsx files
+        typescriptreact = { 'prettier' }, -- For .tsx files
+
+        -- Other common file types that Prettier handles:
+        json = { 'prettier' },
+        jsonc = { 'prettier' },
+        css = { 'prettier' },
+        scss = { 'prettier' },
+        less = { 'prettier' },
+        html = { 'prettier' },
+        markdown = { 'prettier' },
+        yaml = { 'prettier' },
+        graphql = { 'prettier' },
+
+        svelte = { 'prettier' },
+
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
@@ -847,12 +867,14 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load {
+                exclude = { 'c', 'cobol', 'cpp', 'csharp', 'java', 'kotlin', 'latex', 'ocaml', 'ruby', 'rust' },
+              }
+            end,
+          },
         },
         opts = {},
       },
