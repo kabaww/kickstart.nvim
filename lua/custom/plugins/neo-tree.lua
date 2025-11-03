@@ -21,9 +21,7 @@ return {
         hide_gitignored = true,
         hide_by_name = {
           '.github',
-          '.gitignore',
           'package-lock.json',
-          '.prettierrc',
           'bun-lock.json',
         },
         never_show = { '.git' },

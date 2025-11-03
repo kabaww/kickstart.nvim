@@ -775,7 +775,7 @@ require('lazy').setup({
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            vim.lsp.enable(server_name, true)
           end,
         },
       }
@@ -840,6 +840,22 @@ require('lazy').setup({
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
+      formatters = {
+        preitter = {
+          prepend_args = {
+            '--tab-width',
+            '2',
+            '--semi',
+            'false',
+            '--single-quote',
+            'true',
+            '--print-width',
+            '80',
+            '--arrow-parens',
+            'always',
+          },
+        },
+      },
     },
   },
 
@@ -870,9 +886,7 @@ require('lazy').setup({
           {
             'rafamadriz/friendly-snippets',
             config = function()
-              require('luasnip.loaders.from_vscode').lazy_load {
-                exclude = { 'c', 'cobol', 'cpp', 'csharp', 'java', 'kotlin', 'latex', 'ocaml', 'ruby', 'rust' },
-              }
+              require('luasnip.loaders.from_vscode').lazy_load()
             end,
           },
         },

@@ -6,7 +6,6 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
     'nvim-telescope/telescope.nvim', -- Optional, for the class previewer
-    'neovim/nvim-lspconfig', -- Optional, but highly recommended for LSP integration
     'hrsh7th/nvim-cmp', -- Optional, for completion menu styling with colors
     'onsails/lspkind-nvim', -- Optional, for LSP kind icons with cmp and color highlighting
   },
