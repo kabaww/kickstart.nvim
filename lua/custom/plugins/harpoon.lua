@@ -9,7 +9,7 @@ return {
     harpoon:setup()
 
     local conf = require('telescope.config').values
-    local function toggle_telescipe(harpoon_files)
+    local function toggle_telescope(harpoon_files)
       local file_paths = {}
       for _, item in ipairs(harpoon_files.items) do
         table.insert(file_paths, item.value)
@@ -27,11 +27,15 @@ return {
 
     vim.keymap.set('n', '<leader>a', function()
       harpoon:list():add()
-    end)
+    end, { desc = 'Harpoon current buffer' })
+
+    -- vim.keymap.set('n', '<C-e>', function()
+    --   toggle_telescope(harpoon:list())
+    -- end, { desc = 'Open harpoon window' })
 
     vim.keymap.set('n', '<C-e>', function()
-      toggle_telescipe(harpoon:list())
-    end, { desc = 'Open harpoon window' })
+      harpoon.ui:toggle_quick_menu(harpoon:list())
+    end)
 
     vim.keymap.set('n', '<C-1>', function()
       harpoon:list():select(1)
@@ -44,6 +48,13 @@ return {
     end)
     vim.keymap.set('n', '<C-4>', function()
       harpoon:list():select(4)
+    end)
+
+    vim.keymap.set('n', '<C-n>', function()
+      harpoon:list():next()
+    end)
+    vim.keymap.set('n', '<C-b>', function()
+      harpoon:list():prev()
     end)
   end,
 }
